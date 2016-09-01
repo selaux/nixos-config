@@ -15,7 +15,10 @@
 
             map <silent> <C-l> :NERDTreeToggle<CR>
 
-            set smartindent
+            filetype plugin indent on
+            set tabstop=4
+            set shiftwidth=4
+            set expandtab
         '';
         vimrcConfig.vam.knownPlugins = vimPlugins;
         vimrcConfig.vam.pluginDictionaries = [
