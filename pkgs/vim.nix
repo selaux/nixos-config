@@ -28,7 +28,7 @@
                 "The_NERD_tree"
                 "ctrlp"
                 "rust-vim"
-                "youcompleteme"
+                # "youcompleteme"
                 "vim-colorschemes"
             ]; }
         ];

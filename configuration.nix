@@ -48,7 +48,7 @@
       xfce.terminal
       xfce.xfce4volumed
       xfce.xfce4_power_manager
-      ( import ./pkgs/vim.nix { } )
+      ( import ./pkgs/vim.nix )
   ];
 
   fonts = {
