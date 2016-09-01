@@ -13,17 +13,19 @@
             let g:ctrlp_working_path_mode = 'ra'
             let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
 
+            map <silent> <C-l> :NERDTreeToggle<CR>
+
             set smartindent
         '';
-        vimrcConfig.vam.knownPlugins = pkgs.vimPlugins;
+        vimrcConfig.vam.knownPlugins = vimPlugins;
         vimrcConfig.vam.pluginDictionaries = [
             { names = [
                 "vim-nix"
-                # "Syntastic"
+                "Syntastic"
                 "The_NERD_tree"
                 "ctrlp"
-                # "rust-vim"
-                # "youcompleteme"
+                "rust-vim"
+                "youcompleteme"
                 "vim-colorschemes"
             ]; }
         ];
