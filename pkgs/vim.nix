@@ -19,6 +19,8 @@
             set tabstop=4
             set shiftwidth=4
             set expandtab
+
+            colorscheme base16-atelierforest
         '';
         vimrcConfig.vam.knownPlugins = vimPlugins;
         vimrcConfig.vam.pluginDictionaries = [
