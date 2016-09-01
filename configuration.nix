@@ -124,7 +124,7 @@
     windowManager.default = "i3";
     windowManager.i3 = {
         enable = true;
-        configFile = ./applications/i3;
+        configFile = ./pkgs/i3;
     };
 
     libinput = {
