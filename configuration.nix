@@ -34,21 +34,34 @@
   time.timeZone = "Europe/Berlin";
 
   environment.systemPackages = with pkgs; [
-      i3status
-      dmenu
-      firefox
-      spotify
-      lm_sensors
-      leiningen
-      git
+      # Status Bar and Deps
       playerctl
+      i3status
+      pythonPackages.py3status
+      iw
+      acpi
+
+      # i3 Stuffs
+      dmenu
       i3lock-fancy
       compton
-      oh-my-zsh
-      xfce.terminal
       xfce.xfce4volumed
       xfce.xfce4_power_manager
+      xfce.terminal
+
+      # apps
+      firefox
+      spotify
       ( import ./pkgs/vim.nix )
+
+      # programming
+      git
+      leiningen
+      nodejs-6_x
+
+      # misc
+      lm_sensors
+      oh-my-zsh
   ];
 
   fonts = {
