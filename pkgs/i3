@@ -143,12 +143,26 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
+client.focused #81a2be #81a2be #1d1f21 #282a2e
+client.focused_inactive #373b41 #373b41 #969896 #282a2e
+client.unfocused #282a2e #282a2e #969896 #282a2e
+client.urgent #373b41 #cc6666 #ffffff #cc6666
+
 bar {
-        status_command /nix/store/v9wy11a1zr316v3j9n5kqydzf3mpd2gv-i3status-2.10/bin/i3status
-        tray_output primary
+    status_command py3status
+    tray_output primary
+    colors {
+        separator #969896
+        background #1d1f21
+        statusline #c5c8c6
+        focused_workspace #81a2be #81a2be #1d1f21
+        active_workspace #373b41 #373b41 #ffffff
+        inactive_workspace #282a2e #282a2e #969896
+        urgent_workspace #cc6666 #cc6666 #ffffff
+    }
 }
 
 exec --no-startup-id xfce4-volumed
 exec --no-startup-id xfce4-power-manager
+#exec --no-startup-id compton --unredir-if-possible -b --backend glx --vsync=opengl-swc
+exec --no-startup-id feh --bg-scale ~/Bilder/wp.jpg

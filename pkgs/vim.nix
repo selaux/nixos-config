@@ -1,7 +1,8 @@
 (
     with import <nixpkgs> {};
 
-    vim_configurable.customize {
+    let customPlugins = import ./vim-plugins.nix { inherit (pkgs) vimUtils fetchgit fetchFromGitHub ; };
+    in vim_configurable.customize {
         name = "vim";
         vimrcConfig.customRC = ''
             syntax enable
@@ -20,9 +21,9 @@
             set shiftwidth=4
             set expandtab
 
-            colorscheme base16-atelierforest
+            colorscheme base16-tomorrow-night
         '';
-        vimrcConfig.vam.knownPlugins = vimPlugins;
+        vimrcConfig.vam.knownPlugins = vimPlugins // customPlugins;
         vimrcConfig.vam.pluginDictionaries = [
             { names = [
                 "vim-nix"
@@ -31,7 +32,7 @@
                 "ctrlp"
                 "rust-vim"
                 # "youcompleteme"
-                "vim-colorschemes"
+                "base16-vim"
             ]; }
         ];
     }

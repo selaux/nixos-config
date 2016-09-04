@@ -43,6 +43,7 @@
 
       # i3 Stuffs
       dmenu
+      feh
       i3lock-fancy
       compton
       xfce.xfce4volumed
@@ -125,4 +126,5 @@
   };
 
   environment.variables.EDITOR = "vim";
+  environment.etc."i3status.conf".text = import ./pkgs/i3status.nix;
 }
