@@ -7,19 +7,24 @@
         vimrcConfig.customRC = ''
             syntax enable
             set number
-            set backspace=indent,eol,start
+
+            set clipboard=unnamedplus
 
             let g:ctrlp_map = '<c-p>'
             let g:ctrlp_cmd = 'CtrlP'
             let g:ctrlp_working_path_mode = 'ra'
             let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
 
+            let NERDTreeQuitOnOpen=1
             map <silent> <C-l> :NERDTreeToggle<CR>
 
-            filetype plugin indent on
+            set smartindent
             set tabstop=4
             set shiftwidth=4
             set expandtab
+            set softtabstop=4
+
+            set backspace=2
 
             colorscheme base16-tomorrow-night
         '';
@@ -31,6 +36,8 @@
                 "The_NERD_tree"
                 "ctrlp"
                 "rust-vim"
+                "vim-javascript-syntax"
+                "vim-javascript"
                 # "youcompleteme"
                 "base16-vim"
             ]; }
