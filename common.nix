@@ -1,29 +1,10 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
 { config, pkgs, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
-
-  system.stateVersion = "16.03";
-
   nixpkgs.config.allowUnfree = true;
 
-  boot.loader.grub.enable = true;
-  boot.loader.grub.device = "/dev/sda";
-  boot.kernelModules = [ "kvm-intel" ];
-  boot.initrd.luks.devices = [
-    {
-      name = "root";
-      device = "/dev/sda2";
-      preLVM = true;
-    }
-  ];
+  hardware.pulseaudio.enable = true; 
+
   networking.networkmanager.enable = true;
 
   i18n = {
@@ -45,24 +26,23 @@
       dmenu
       feh
       i3lock-fancy
-      compton
-      xfce.xfce4volumed
-      xfce.xfce4_power_manager
-      xfce.terminal
+      pa_applet
+      gnome3.gnome_settings_daemon
+      gnome3.networkmanagerapplet
+      gnome3.gnome_terminal
 
       # apps
-      firefox
+      firefox-beta-bin
       spotify
+      arandr
       ( import ./pkgs/vim.nix )
 
       # programming
       git
-      leiningen
-      nodejs-6_x
 
       # misc
       lm_sensors
-      oh-my-zsh
+      openfortivpn
   ];
 
   fonts = {
@@ -79,29 +59,16 @@
     ];
   };
 
-  programs.zsh.enable = true;
-  programs.zsh.promptInit = ''
-    ZSH=${pkgs.oh-my-zsh}/share/oh-my-zsh/
-
-    ZSH_THEME="robbyrussell"
-    DISABLE_AUTO_UPDATE="true"
-
-    plugins=(git systemd)
-
-    source $ZSH/oh-my-zsh.sh
-  '';
+  programs.bash.enableCompletion = true;
 
   services.dbus.enable = true;
-  services.thinkfan = {
-    enable = true;
-    sensor = "/sys/class/hwmon/hwmon2/temp1_input";
-  };
   services.xserver = {
     enable = true;
     layout = "de";
     displayManager = {
         slim.enable = true;
         slim.defaultUser = "stefan";
+        slim.autoLogin = true;
     };
     desktopManager.xterm.enable = false;
     desktopManager.default = "none";
@@ -117,8 +84,11 @@
         tapping = false;
     };
   };
+  services.gnome3 = {
+      gnome-terminal-server.enable = true;
+  };
 
-  users.defaultUserShell = "/run/current-system/sw/bin/zsh";
+  users.defaultUserShell = "/run/current-system/sw/bin/bash";
   users.extraUsers.stefan = {
      isNormalUser = true;
      uid = 1000;

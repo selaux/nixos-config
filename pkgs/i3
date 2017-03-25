@@ -30,7 +30,7 @@ font pango:DejaVu Sans Mono 11
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec xfce4-terminal
+bindsym $mod+Return exec gnome-terminal
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -162,7 +162,7 @@ bar {
     }
 }
 
-exec --no-startup-id xfce4-volumed
-exec --no-startup-id xfce4-power-manager
-#exec --no-startup-id compton --unredir-if-possible -b --backend glx --vsync=opengl-swc
+exec --no-startup-id nm-applet
+exec --no-startup-id pa-applet
+exec --no-startup-id gnome-settings-daemon
 exec --no-startup-id feh --bg-scale ~/Bilder/wp.jpg
