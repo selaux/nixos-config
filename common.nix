@@ -119,7 +119,6 @@ in
   users.defaultUserShell = "/run/current-system/sw/bin/bash";
   users.extraUsers.stefan = {
      isNormalUser = true;
-     uid = 1000;
      extraGroups = [ "wheel" "networkmanager" "disk" "audio" "video" "systemd-journal" ];
    };
 

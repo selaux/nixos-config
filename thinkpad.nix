@@ -8,15 +8,16 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ./common.nix
     ];
 
-  boot.loader.grub.enable = true;
-  boot.loader.grub.device = "/dev/sda";
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelModules = [ "kvm-intel" ];
   boot.initrd.luks.devices = [
     {
-      name = "root";
-      device = "/dev/sda2";
+      name = "lvm";
+      device = "/dev/sda3";
       preLVM = true;
     }
   ];
