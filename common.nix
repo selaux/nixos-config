@@ -1,5 +1,7 @@
 { config, pkgs, ... }:
-
+let
+     customVim = (import ./pkgs/vim.nix { inherit pkgs; });
+in
 {
   nixpkgs.config.allowUnfree = true;
 
@@ -8,7 +10,7 @@
   networking.networkmanager.enable = true;
 
   i18n = {
-    consoleKeyMap = "de";
+    consoleKeyMap = "us";
     defaultLocale = "en_US.UTF-8";
   };
 
@@ -27,15 +29,22 @@
       feh
       i3lock-fancy
       pa_applet
-      gnome3.gnome_settings_daemon
       gnome3.networkmanagerapplet
       gnome3.gnome_terminal
+      gnome3.adwaita-icon-theme
 
       # apps
       firefox-beta-bin
+      thunderbird
+      slack
       spotify
+      evince
       arandr
-      ( import ./pkgs/vim.nix )
+
+      # dev stuff
+      htop
+      customVim
+      libreoffice-fresh
 
       # programming
       git
@@ -46,6 +55,9 @@
   ];
 
   fonts = {
+    fontconfig = {
+      enable = true;
+    };
     enableFontDir = true;
     enableGhostscriptFonts = true;
     fonts = with pkgs; [
@@ -60,11 +72,13 @@
   };
 
   programs.bash.enableCompletion = true;
-
+  programs.bash.shellAliases = {
+      "vim" = "${customVim}/bin/vim";
+  };
   services.dbus.enable = true;
   services.xserver = {
     enable = true;
-    layout = "de";
+    layout = "us";
     displayManager = {
         slim.enable = true;
         slim.defaultUser = "stefan";
@@ -75,7 +89,7 @@
     windowManager.default = "i3";
     windowManager.i3 = {
         enable = true;
-        configFile = ./pkgs/i3;
+        configFile = "/etc/i3config";
     };
 
     libinput = {
@@ -87,6 +101,10 @@
   services.gnome3 = {
       gnome-terminal-server.enable = true;
   };
+  services.printing = {
+    enable = true;
+    drivers = [ pkgs.gutenprint ];
+  };
 
   users.defaultUserShell = "/run/current-system/sw/bin/bash";
   users.extraUsers.stefan = {
@@ -95,6 +113,7 @@
      extraGroups = [ "wheel" "networkmanager" "disk" "audio" "video" "systemd-journal" ];
   };
 
-  environment.variables.EDITOR = "vim";
+  environment.variables.EDITOR = "${customVim}/bin/vim";
+  environment.etc."i3config".text = (import ./pkgs/i3.nix { inherit pkgs; });
   environment.etc."i3status.conf".text = import ./pkgs/i3status.nix;
 }

@@ -1,8 +1,9 @@
-(
-    with import <nixpkgs> {};
-
-    let customPlugins = import ./vim-plugins.nix { inherit (pkgs) vimUtils fetchgit fetchFromGitHub ; };
-    in vim_configurable.customize {
+{
+  pkgs
+}:
+    let
+        customPlugins = import ./vim-plugins.nix { inherit (pkgs) vimUtils fetchgit fetchFromGitHub ; };
+    in pkgs.vim_configurable.customize {
         name = "vim";
         vimrcConfig.customRC = ''
             syntax enable
@@ -26,9 +27,9 @@
 
             set backspace=2
 
-            colorscheme base16-tomorrow-night
+            colorscheme base16-tomorrow
         '';
-        vimrcConfig.vam.knownPlugins = vimPlugins // customPlugins;
+        vimrcConfig.vam.knownPlugins = pkgs.vimPlugins // customPlugins;
         vimrcConfig.vam.pluginDictionaries = [
             { names = [
                 "vim-nix"
@@ -38,9 +39,8 @@
                 "rust-vim"
                 "vim-javascript-syntax"
                 "vim-javascript"
-                # "youcompleteme"
+                "youcompleteme"
                 "base16-vim"
             ]; }
         ];
     }
-)
