@@ -1,6 +1,7 @@
-{ config, pkgs, ... }:
+{ config, pkgs, stdenv, ... }:
 let
      customVim = (import ./pkgs/vim.nix { inherit pkgs; });
+     evolutionEws = (import ./pkgs/evolutionEws.nix { inherit (pkgs) stdenv gnome3 libmspack wrapGAppsHook fetchurl; });
 in
 {
   nixpkgs.config.allowUnfree = true;
@@ -32,13 +33,19 @@ in
       gnome3.networkmanagerapplet
       gnome3.gnome_terminal
       gnome3.adwaita-icon-theme
-
+      gnome3.nautilus
+      gnome3.nautilus-sendto
+      gnome3.gnome_control_center
+      gnome3.glib_networking
+      
       # apps
       firefox-beta-bin
+      evolutionEws
       thunderbird
       slack
       spotify
-      evince
+      gnome3.evince
+      gnome3.eog
       arandr
 
       # dev stuff
@@ -52,6 +59,7 @@ in
       # misc
       lm_sensors
       openfortivpn
+      tree
   ];
 
   fonts = {
@@ -99,7 +107,9 @@ in
     };
   };
   services.gnome3 = {
+      gnome-keyring.enable = true;
       gnome-terminal-server.enable = true;
+      gnome-online-accounts.enable = true;
   };
   services.printing = {
     enable = true;
@@ -111,7 +121,10 @@ in
      isNormalUser = true;
      uid = 1000;
      extraGroups = [ "wheel" "networkmanager" "disk" "audio" "video" "systemd-journal" ];
-  };
+   };
+
+  services.dbus.packages = [ evolutionEws ];
+  systemd.packages = [ evolutionEws ];
 
   environment.variables.EDITOR = "${customVim}/bin/vim";
   environment.etc."i3config".text = (import ./pkgs/i3.nix { inherit pkgs; });

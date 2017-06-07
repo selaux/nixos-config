@@ -84,6 +84,7 @@ stdenv.mkDerivation rec {
     make install
     popd
     fixupPhase
+    echo "### Done"
   '';
 
   meta = with stdenv.lib; {

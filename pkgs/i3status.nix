@@ -8,13 +8,13 @@
 }
 
 order += "disk /"
-// order += "battery_level"
+order += "battery_level"
 order += "tztime local"
 
 battery_level {
         threshold_bad = 10
         hide_seconds = true
-        format = "Battery {percent}% {time_remaining} remaining"
+        format = "Battery {percent}%"
 }
 
 tztime local {

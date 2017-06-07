@@ -33,13 +33,11 @@
         vimrcConfig.vam.pluginDictionaries = [
             { names = [
                 "vim-nix"
-                "Syntastic"
                 "The_NERD_tree"
                 "ctrlp"
                 "rust-vim"
                 "vim-javascript-syntax"
                 "vim-javascript"
-                "youcompleteme"
                 "base16-vim"
             ]; }
         ];
