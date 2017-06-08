@@ -37,6 +37,5 @@
   services.xserver.displayManager.xserverArgs = [ "-dpi 192" ];
   environment.variables.GDK_SCALE = "2"; 
 
-  virtualisation.docker.enable = true;
   services.dockerRegistry.enable = true;
 }

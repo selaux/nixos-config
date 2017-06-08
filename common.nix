@@ -128,4 +128,6 @@ in
   environment.variables.EDITOR = "${customVim}/bin/vim";
   environment.etc."i3config".text = (import ./pkgs/i3.nix { inherit pkgs; });
   environment.etc."i3status.conf".text = import ./pkgs/i3status.nix;
+
+  virtualisation.docker.enable = true;
 }
