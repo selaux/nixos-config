@@ -37,6 +37,7 @@ in
       gnome3.nautilus-sendto
       gnome3.gnome_control_center
       gnome3.glib_networking
+      gnome3.gnome-screenshot
       
       # apps
       firefox-beta-bin
@@ -51,12 +52,13 @@ in
       # dev stuff
       htop
       customVim
-      libreoffice-fresh
+      jetbrains.idea-ultimate
 
       # programming
       git
 
       # misc
+      libreoffice-fresh
       lm_sensors
       openfortivpn
       tree
