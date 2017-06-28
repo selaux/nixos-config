@@ -33,7 +33,7 @@ font pango:DejaVu Sans Mono 11
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec gnome-terminal
+bindsym $mod+Return exec ${pkgs.tilix}/bin/tilix
 
 # kill focused window
 bindsym $mod+Shift+q kill

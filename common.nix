@@ -31,7 +31,6 @@ in
       i3lock-fancy
       pa_applet
       gnome3.networkmanagerapplet
-      gnome3.gnome_terminal
       gnome3.adwaita-icon-theme
       gnome3.nautilus
       gnome3.nautilus-sendto
@@ -124,7 +123,7 @@ in
      extraGroups = [ "wheel" "networkmanager" "disk" "audio" "video" "systemd-journal" ];
    };
 
-  services.dbus.packages = [ evolutionEws ];
+  services.dbus.packages = [ pkgs.gnome3.dconf evolutionEws ];
   systemd.packages = [ evolutionEws ];
 
   environment.variables.EDITOR = "${customVim}/bin/vim";
