@@ -6,7 +6,10 @@ in
 {
   nixpkgs.config.allowUnfree = true;
 
-  hardware.pulseaudio.enable = true; 
+  hardware.pulseaudio = {
+    enable = true;
+    systemWide = true;
+  };
 
   networking.networkmanager.enable = true;
 
@@ -30,6 +33,7 @@ in
       feh
       i3lock-fancy
       pa_applet
+      pavucontrol
       gnome3.networkmanagerapplet
       gnome3.adwaita-icon-theme
       gnome3.nautilus
@@ -120,7 +124,7 @@ in
   users.defaultUserShell = "/run/current-system/sw/bin/bash";
   users.extraUsers.stefan = {
      isNormalUser = true;
-     extraGroups = [ "wheel" "networkmanager" "disk" "audio" "video" "systemd-journal" ];
+     extraGroups = [ "wheel" "networkmanager" "disk" "audio" "pulse" "video" "systemd-journal" ];
    };
 
   services.dbus.packages = [ pkgs.gnome3.dconf evolutionEws ];
