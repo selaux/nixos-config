@@ -46,6 +46,7 @@ in
       firefox-beta-bin
       evolutionEws
       thunderbird
+      libreoffice-fresh
       slack
       spotify
       gnome3.evince
@@ -61,10 +62,13 @@ in
       git
 
       # misc
-      libreoffice-fresh
       lm_sensors
       openfortivpn
       tree
+      wget
+      file
+      curl
+      python3
   ];
 
   fonts = {
