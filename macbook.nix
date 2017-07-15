@@ -35,7 +35,7 @@
   hardware.facetimehd.enable = true;
 
   services.xserver.displayManager.xserverArgs = [ "-dpi 192" ];
-  environment.variables.GDK_SCALE = "2"; 
+  fonts.fontconfig.dpi = 192;
 
   services.dockerRegistry.enable = true;
 }

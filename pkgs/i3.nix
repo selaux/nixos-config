@@ -168,4 +168,5 @@ bar {
 
 exec --no-startup-id ${pkgs.gnome3.networkmanagerapplet}/bin/nm-applet
 exec --no-startup-id ${pkgs.pa_applet}/bin/pa-applet
+exec --no-startup-id ${pkgs.dunst}/bin/dunst -conf /etc/xdg/dunstrc
 exec --no-startup-id ${pkgs.feh}/bin/feh --bg-scale ~/Bilder/wp.jpg''
