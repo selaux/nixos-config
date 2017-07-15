@@ -1,12 +1,12 @@
 { vimUtils, fetchgit, fetchFromGitHub }:
 {
     base16-vim = vimUtils.buildVimPluginFrom2Nix {
-          name = "base16-vim-2016-09-04";
+          name = "base16-vim-2017-07-15";
           src = fetchFromGitHub {
               owner = "chriskempson";
               repo = "base16-vim";     
-              rev = "acf210d5f62410b9b74ac142b7d9bd85cb7d41d4";
-              sha256 = "08vjr5q56nd20yn0qmvipqf9ymww7ys0jwr0j7gvq4rgbpv5i0gi";
+              rev = "c1c3e6ccb1a4cd4ea00162abb4ccece4a3e69d0b";
+              sha256 = "0v4izy03aqarrympfn7yk7x2ybic8aplfigpikg8hb42f911z8n2";
           };
           dependencies = [];
     };
