@@ -11,31 +11,19 @@
       ./common.nix
     ];
 
-  boot.loader.grub.device = "/dev/disk/by-id/usb-APPLE_SD_Card_Reader_000000000820-0:0";
+  # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
   boot.initrd.luks.devices = [
     {
-      name = "cryptroot";
-      device = "/dev/disk/by-uuid/b6645c30-a63b-42c1-9af0-ef98de3b209b";
+      name = "lvm";
+      device = "/dev/disk/by-uuid/76ea1fb5-f02b-4307-94c4-8c3ecf5b0c8c";
       preLVM = true;
+      allowDiscards = true;
     }
   ];
 
-  boot.extraModprobeConfig = ''
-    options libata.force=noncq
-    options resume=/dev/disk/by-uuid/b6645c30-a63b-42c1-9af0-ef98de3b209b
-    options snd_hda_intel index=0 model=intel-mac-auto id=PCH
-    options snd_hda_intel index=1 model=intel-mac-auto id=HDMI
-    options snd-hda-intel model=mbp101
-    options hid_apple fnmode=2
-  '';
-
-  hardware.facetimehd.enable = true;
-
   services.xserver.displayManager.xserverArgs = [ "-dpi 192" ];
   fonts.fontconfig.dpi = 192;
-
-  services.dockerRegistry.enable = true;
 }
