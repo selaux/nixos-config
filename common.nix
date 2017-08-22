@@ -44,8 +44,8 @@ in
       
       # apps
       firefox-beta-bin
+      chromium
       evolutionEws
-      thunderbird
       libreoffice-fresh
       slack
       spotify
