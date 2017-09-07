@@ -1,7 +1,7 @@
 { config, pkgs, stdenv, ... }:
 let
      customVim = (import ./pkgs/vim.nix { inherit pkgs; });
-     evolutionEws = (import ./pkgs/evolutionEws.nix { inherit (pkgs) stdenv gnome3 libmspack wrapGAppsHook fetchurl; });
+     evolutionEws = (import ./pkgs/evolutionEws.nix { inherit (pkgs) stdenv gnome3 libmspack wrapGAppsHook fetchurl cmake; });
 in
 {
   nixpkgs.config.allowUnfree = true;
