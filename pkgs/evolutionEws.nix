@@ -1,4 +1,4 @@
-{ stdenv, gnome3, libmspack, wrapGAppsHook, fetchurl }:
+{ stdenv, gnome3, libmspack, wrapGAppsHook, fetchurl, cmake }:
 
 # Getting evolution to find external plugins requires patching. Brute force
 # solution: make a derivation with Evolution + EDS + plugins all in one store
@@ -6,15 +6,16 @@
 
 with stdenv.lib;
 let
+    version = "${gnome3.version}.5";
     ewsSrc=fetchurl {
-     url = "mirror://gnome/sources/evolution-ews/3.22/evolution-ews-3.22.0.tar.xz";
-     sha256 = "1x933zsfj9mjsrj6lgjk9khzsy4q7d0cbb7whx4gdrycrsqy2b8w";
+     url = "mirror://gnome/sources/evolution-ews/${gnome3.version}/evolution-ews-${version}.tar.xz";
+     sha256 = "1la3k5arj06qsklgv531bap8974ybbmys7l8gnnkfblv2c7j0xyv";
    };
    evolution_data_server = gnome3.evolution_data_server;
    evolution = gnome3.evolution;
 in
 stdenv.mkDerivation rec {
-  name = "evolution-ews-${gnome3.version}";
+  name = "evolution-ews-${version}";
 
   srcs = [ evolution_data_server.src evolution.src ewsSrc ];
 
@@ -25,6 +26,7 @@ stdenv.mkDerivation rec {
   #   path).
   buildInputs = filter (x: x != evolution && x != evolution_data_server)
     (evolution_data_server.buildInputs
+      ++ [ cmake ]
       ++ evolution.buildInputs
       ++ evolution_data_server.nativeBuildInputs
       ++ evolution.nativeBuildInputs
@@ -47,7 +49,7 @@ stdenv.mkDerivation rec {
     echo "### Building evolution-data-server"
     echo
     pushd ${evolution_data_server.name}
-    ./configure --prefix=$out ${concatStringsSep " " evolution_data_server.configureFlags or []}
+    cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX:PATH=$out ${concatStringsSep " " evolution_data_server.cmakeFlags or []}
     make -j $NIX_BUILD_CORES -l $NIX_BUILD_CORES
     make install
     popd
@@ -58,7 +60,7 @@ stdenv.mkDerivation rec {
     # Save NIX_CFLAGS_COMPILE
     export ORIG_NIX_CFLAGS_COMPILE="$NIX_CFLAGS_COMPILE"
     export NIX_CFLAGS_COMPILE="$ORIG_NIX_CFLAGS_COMPILE ${evolution.NIX_CFLAGS_COMPILE}"
-    ./configure --prefix=$out ${concatStringsSep " " evolution.configureFlags or []}
+    cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX:PATH=$out ${concatStringsSep " " evolution.cmakeFlags or []}
     make -j $NIX_BUILD_CORES -l $NIX_BUILD_CORES
     make install
     popd
@@ -67,19 +69,8 @@ stdenv.mkDerivation rec {
     echo
     echo "### Building evolution-ews"
     echo
-    pushd ${name}.0
-    sed -e "s|\<ewsdatadir=.*|ewsdatadir=$out/share/evolution-data-server/ews|" \
-            -e "s|\<privincludedir=.*|privincludedir=$out/include/evolution-data-server|" \
-            -e "s|\<privlibdir=.*|privlibdir=$out/lib/evolution-data-server|" \
-            -e "s|\<camel_providerdir=.*|camel_providerdir=$out/lib/evolution-data-server/camel-providers|" \
-            -e "s|\<ebook_backenddir=.*|ebook_backenddir=$out/lib/evolution-data-server/addressbook-backends|" \
-            -e "s|\<ecal_backenddir=.*|ecal_backenddir=$out/lib/evolution-data-server/calendar-backends|" \
-            -e "s|\<edataserver_privincludedir=.*|edataserver_privincludedir=$out/include/evolution-data-server|" \
-            -e "s|\<eds_moduledir=.*|eds_moduledir=$out/lib/evolution-data-server/registry-modules|" \
-            -e "s|\<errordir=.*|errordir=$out/share/evolution/errors|" \
-            -e "s|\<evo_moduledir=.*|evo_moduledir=$out/lib/evolution/modules|" \
-            -i configure
-    ./configure --prefix=$out
+    pushd ${name}
+    cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX:PATH=$out
     make -j $NIX_BUILD_CORES -l $NIX_BUILD_CORES
     make install
     popd
