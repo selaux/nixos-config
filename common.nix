@@ -124,6 +124,7 @@ in
     enable = true;
     drivers = [ pkgs.gutenprint ];
   };
+  services.avahi.enable = true;
 
   users.defaultUserShell = "/run/current-system/sw/bin/bash";
   users.extraUsers.stefan = {
