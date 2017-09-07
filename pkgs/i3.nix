@@ -36,6 +36,10 @@ floating_modifier $mod
 # start a terminal
 bindsym $mod+Return exec ${pkgs.gnome3.gnome_terminal}/bin/gnome-terminal
 
+# Screenshots
+bindsym Print       exec ${pkgs.gnome3.gnome-screenshot}/bin/gnome-screenshot
+bindsym $mod+Print  exec ${pkgs.gnome3.gnome-screenshot}/bin/gnome-screenshot -i
+
 # kill focused window
 bindsym $mod+Shift+q kill
 
@@ -165,6 +169,9 @@ bar {
         urgent_workspace #cc6666 #cc6666 #ffffff
     }
 }
+
+# Floating stuff
+for_window [class="^firefox$"] floating disable
 
 exec --no-startup-id ${pkgs.gnome3.networkmanagerapplet}/bin/nm-applet
 exec --no-startup-id ${pkgs.pa_applet}/bin/pa-applet
