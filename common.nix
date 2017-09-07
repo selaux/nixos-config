@@ -138,7 +138,6 @@ in
   environment.etc."i3config".text = (import ./pkgs/i3.nix { inherit pkgs; });
   environment.etc."i3status.conf".text = import ./pkgs/i3status.nix;
   environment.etc."xdg/dunstrc".text = (import ./pkgs/dunstrc.nix { inherit pkgs; });
-  environment.etc."xdg/tilix/schemes/tomorrow-dark.json".text = builtins.readFile ./pkgs/tilix/schemes/tomorrow-dark.json;
 
   virtualisation.docker.enable = true;
 }
