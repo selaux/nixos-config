@@ -131,7 +131,7 @@ in
   users.defaultUserShell = "/run/current-system/sw/bin/bash";
   users.extraUsers.stefan = {
      isNormalUser = true;
-     extraGroups = [ "wheel" "networkmanager" "disk" "audio" "pulse" "video" "systemd-journal" ];
+     extraGroups = [ "wheel" "networkmanager" "disk" "audio" "pulse" "video" "systemd-journal" "docker" "vboxusers" ];
    };
 
   services.dbus.packages = [ pkgs.gnome3.dconf evolutionEws ];
@@ -143,4 +143,5 @@ in
   environment.etc."xdg/dunstrc".text = (import ./pkgs/dunstrc.nix { inherit pkgs; });
 
   virtualisation.docker.enable = true;
+  virtualisation.virtualbox.host.enable = true;
 }
