@@ -1,6 +1,4 @@
-{
-  pkgs
-}:
+{ pkgs }:
     let
         customPlugins = import ./vim-plugins.nix { inherit (pkgs) vimUtils fetchgit fetchFromGitHub ; };
     in pkgs.vim_configurable.customize {
@@ -26,8 +24,6 @@
             set softtabstop=4
 
             set backspace=2
-
-            colorscheme base16-tomorrow
         '';
         vimrcConfig.vam.knownPlugins = pkgs.vimPlugins // customPlugins;
         vimrcConfig.vam.pluginDictionaries = [
@@ -38,7 +34,6 @@
                 "rust-vim"
                 "vim-javascript-syntax"
                 "vim-javascript"
-                "base16-vim"
             ]; }
         ];
     }

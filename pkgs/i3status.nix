@@ -1,4 +1,6 @@
-''general {
+{ pkgs }:
+''
+general {
         output_format = "i3bar"
         colors = false
         color_good = "#b5bd68"
@@ -23,4 +25,5 @@ tztime local {
 
 disk "/" {
         format = "%free"
-}''
+}
+''

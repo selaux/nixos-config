@@ -1,6 +1,4 @@
-{
-    pkgs
-}:
+{ pkgs }:
 let
   iconSubFolders = [ "status" "devices" "actions" ];
   iconFolders = builtins.foldl' (all: sub: all + "${pkgs.gnome2.gnome_icon_theme}/share/icons/gnome/48x48/${sub}/:") "" iconSubFolders;

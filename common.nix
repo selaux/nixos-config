@@ -139,7 +139,7 @@ in
 
   environment.variables.EDITOR = "${customVim}/bin/vim";
   environment.etc."i3config".text = (import ./pkgs/i3.nix { inherit pkgs; });
-  environment.etc."i3status.conf".text = import ./pkgs/i3status.nix;
+  environment.etc."i3status.conf".text = import ./pkgs/i3status.nix { inherit pkgs; };
   environment.etc."xdg/dunstrc".text = (import ./pkgs/dunstrc.nix { inherit pkgs; });
 
   virtualisation.docker.enable = true;
