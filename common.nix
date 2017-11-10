@@ -1,6 +1,7 @@
 { config, pkgs, stdenv, ... }:
 let
-     customVim = (import ./pkgs/vim.nix { inherit pkgs; });
+     rofiMenus = import ./pkgs/rofiMenus.nix { inherit pkgs; };
+     customVim = import ./pkgs/vim.nix { inherit pkgs; };
      evolutionEws = (import ./pkgs/evolutionEws.nix { inherit (pkgs) stdenv gnome3 libmspack wrapGAppsHook fetchurl cmake; });
 in
 {
@@ -29,11 +30,6 @@ in
       iw
       acpi
 
-      # i3 Stuffs
-      dmenu
-      feh
-      i3lock-fancy
-      pa_applet
       pavucontrol
       gnome3.networkmanagerapplet
       gnome3.adwaita-icon-theme
@@ -138,7 +134,7 @@ in
   systemd.packages = [ evolutionEws ];
 
   environment.variables.EDITOR = "${customVim}/bin/vim";
-  environment.etc."i3config".text = (import ./pkgs/i3.nix { inherit pkgs; });
+  environment.etc."i3config".text = (import ./pkgs/i3.nix { inherit pkgs rofiMenus; });
   environment.etc."i3status.conf".text = import ./pkgs/i3status.nix { inherit pkgs; };
   environment.etc."xdg/dunstrc".text = (import ./pkgs/dunstrc.nix { inherit pkgs; });
 
