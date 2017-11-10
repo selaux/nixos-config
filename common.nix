@@ -4,6 +4,7 @@ let
      evolutionEws = (import ./pkgs/evolutionEws.nix { inherit (pkgs) stdenv gnome3 libmspack wrapGAppsHook fetchurl cmake; });
 in
 {
+  nix.package = pkgs.nixUnstable;
   nixpkgs.config.allowUnfree = true;
 
   hardware.pulseaudio = {
