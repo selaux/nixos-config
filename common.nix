@@ -42,7 +42,8 @@ in
       gnome3.gnome_control_center
       gnome3.glib_networking
       gnome3.gnome-screenshot
-      
+      gnome3.file-roller
+
       # apps
       firefox-beta-bin
       chromium
@@ -57,7 +58,7 @@ in
       # dev stuff
       htop
       customVim
-      jetbrains.idea-ultimate
+      atom
 
       # programming
       git
