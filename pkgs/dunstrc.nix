@@ -1,5 +1,6 @@
-{ pkgs }:
+{ pkgs, theme }:
 let
+  inherit (theme) blue yellow red foreground background;
   iconSubFolders = [ "status" "devices" "actions" ];
   iconFolders = builtins.foldl' (all: sub: all + "${pkgs.gnome2.gnome_icon_theme}/share/icons/gnome/48x48/${sub}/:") "" iconSubFolders;
 in
@@ -19,17 +20,17 @@ in
   icon_folders = ${iconFolders}
 
   [urgency_low]
-  frame_color = "#81a2be"
-  background = "#1d1f21"
-  foreground = "#c5c8c6"
+  frame_color = "${blue}"
+  background = "${background}"
+  foreground = "${foreground}"
 
   [urgency_normal]
-  frame_color = "#f0c674"
-  background = "#1d1f21"
-  foreground = "#c5c8c6"
+  frame_color = "${yellow}"
+  background = "${background}"
+  foreground = "${foreground}"
 
   [urgency_critical]
-  frame_color = "#cc6666"
-  background = "#1d1f21"
-  foreground = "#c5c8c6"
+  frame_color = "${red}"
+  background = "${background}"
+  foreground = "${foreground}"
 ''

@@ -1,8 +1,9 @@
 { config, pkgs, stdenv, ... }:
 let
-     rofiMenus = import ./pkgs/rofiMenus.nix { inherit pkgs; };
-     customVim = import ./pkgs/vim.nix { inherit pkgs; };
-     evolutionEws = (import ./pkgs/evolutionEws.nix { inherit (pkgs) stdenv gnome3 libmspack wrapGAppsHook fetchurl cmake; });
+    theme = import ./theme/base16Tomorrow.nix;
+    rofiMenus = import ./pkgs/rofiMenus.nix { inherit pkgs theme; };
+    customVim = import ./pkgs/vim.nix { inherit pkgs; };
+    evolutionEws = (import ./pkgs/evolutionEws.nix { inherit (pkgs) stdenv gnome3 libmspack wrapGAppsHook fetchurl cmake; });
 in
 {
   nix.package = pkgs.nixUnstable;
@@ -137,9 +138,9 @@ in
   systemd.packages = [ evolutionEws ];
 
   environment.variables.EDITOR = "${customVim}/bin/vim";
-  environment.etc."i3config".text = (import ./pkgs/i3.nix { inherit pkgs rofiMenus; });
+  environment.etc."i3config".text = (import ./pkgs/i3.nix { inherit pkgs rofiMenus theme; });
   environment.etc."i3status.conf".text = import ./pkgs/i3status.nix { inherit pkgs; };
-  environment.etc."xdg/dunstrc".text = (import ./pkgs/dunstrc.nix { inherit pkgs; });
+  environment.etc."xdg/dunstrc".text = (import ./pkgs/dunstrc.nix { inherit pkgs theme; });
 
   virtualisation.docker.enable = true;
   virtualisation.virtualbox.host.enable = true;

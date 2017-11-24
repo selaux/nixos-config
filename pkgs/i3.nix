@@ -1,4 +1,7 @@
-{ pkgs, rofiMenus }:
+{ pkgs, rofiMenus, theme }:
+let
+    inherit (theme) blue background foreground magenta cyan red gray;
+in
 ''
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
@@ -129,22 +132,23 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-client.focused #81a2be #81a2be #1d1f21 #282a2e
-client.focused_inactive #373b41 #373b41 #969896 #282a2e
-client.unfocused #282a2e #282a2e #969896 #282a2e
-client.urgent #373b41 #cc6666 #ffffff #cc6666
+client.focused ${blue} ${blue} ${background} ${blue} ${blue}
+client.focused_inactive ${magenta} ${magenta} ${background} ${magenta} ${magenta}
+client.unfocused ${background} ${background} ${foreground} ${background} ${background}
+client.urgent ${red} ${red} ${foreground} ${red} ${red}
+client.placeholder ${background} ${background} ${foreground} ${background} ${background}
 
 bar {
     status_command py3status
     tray_output primary
     colors {
-        separator #969896
-        background #1d1f21
-        statusline #c5c8c6
-        focused_workspace #81a2be #81a2be #1d1f21
-        active_workspace #373b41 #373b41 #ffffff
-        inactive_workspace #282a2e #282a2e #969896
-        urgent_workspace #cc6666 #cc6666 #ffffff
+        separator ${foreground}
+        background ${background}
+        statusline ${foreground}
+        focused_workspace ${blue} ${blue} ${background}
+        active_workspace ${cyan} ${cyan} ${background}
+        inactive_workspace ${background} ${background} ${foreground}
+        urgent_workspace ${red} ${red} ${foreground}
     }
 }
 
