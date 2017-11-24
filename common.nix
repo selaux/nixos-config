@@ -113,6 +113,10 @@ in
         tapping = false;
     };
   };
+  services.compton = {
+    enable = true;
+    vSync = "opengl-swc";
+  };
   services.gnome3 = {
       gnome-keyring.enable = true;
       gnome-terminal-server.enable = true;
