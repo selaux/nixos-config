@@ -24,7 +24,6 @@ in
 
   environment.systemPackages = with pkgs; [
       # Status Bar and Deps
-      playerctl
       i3status
       pythonPackages.py3status
       iw

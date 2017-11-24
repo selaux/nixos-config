@@ -99,11 +99,9 @@ bindsym $mod+Shift+l exec i3lock-fancy
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec ${rofiMenus}/bin/power-menu
 
-# Media Player Controls
-bindsym XF86AudioPlay exec playerctl play-pause
-bindsym XF86AudioPause exec playerctl pause
-bindsym XF86AudioNext exec playerctl next
-bindsym XF86AudioPrev exec playerctl previous
+# Brightness Controls
+bindsym XF86MonBrightnessUp exec ${pkgs.xorg.xbacklight}/bin/xbacklight -inc 10
+bindsym XF86MonBrightnessDown exec ${pkgs.xorg.xbacklight}/bin/xbacklight -dec 10
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
