@@ -6,10 +6,10 @@
 
 with stdenv.lib;
 let
-    version = "${gnome3.version}.1";
+    version = "${gnome3.version}.3";
     ewsSrc=fetchurl {
      url = "mirror://gnome/sources/evolution-ews/${gnome3.version}/evolution-ews-${version}.tar.xz";
-     sha256 = "0kz7dfrmrynqsk6lwmrgp9vdj7dz1c4nkagj68alk6r1ri8xyhb2";
+     sha256 = "1vcxcn8rlj2dxn2jhf4782cc6rcfnrgb2287l3wjz16nl6b5p6bh";
    };
    evolution_data_server = gnome3.evolution_data_server;
    evolution = gnome3.evolution;
