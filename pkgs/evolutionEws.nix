@@ -6,10 +6,10 @@
 
 with stdenv.lib;
 let
-    version = "${gnome3.version}.3";
+    version = "${gnome3.version}.6";
     ewsSrc=fetchurl {
      url = "mirror://gnome/sources/evolution-ews/${gnome3.version}/evolution-ews-${version}.tar.xz";
-     sha256 = "1vcxcn8rlj2dxn2jhf4782cc6rcfnrgb2287l3wjz16nl6b5p6bh";
+     sha256 = "0h3cwi2qj72i7d97md8p04c3z8pk0kdikn5nx8vkigky5rhq9vih";
    };
    evolution_data_server = gnome3.evolution_data_server;
    evolution = gnome3.evolution;
@@ -57,15 +57,10 @@ stdenv.mkDerivation rec {
     echo "### Building evolution"
     echo
     pushd ${evolution.name}
-    # Save NIX_CFLAGS_COMPILE
-    export ORIG_NIX_CFLAGS_COMPILE="$NIX_CFLAGS_COMPILE"
-    export NIX_CFLAGS_COMPILE="$ORIG_NIX_CFLAGS_COMPILE ${evolution.NIX_CFLAGS_COMPILE}"
     cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX:PATH=$out ${concatStringsSep " " evolution.cmakeFlags or []}
     make -j $NIX_BUILD_CORES -l $NIX_BUILD_CORES
     make install
     popd
-    # Restore NIX_CFLAGS_COMPILE
-    export NIX_CFLAGS_COMPILE="$ORIG_NIX_CFLAGS_COMPILE"
     echo
     echo "### Building evolution-ews"
     echo
