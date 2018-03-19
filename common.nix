@@ -15,7 +15,7 @@ in
   };
 
   networking.networkmanager.enable = true;
-
+  
   i18n = {
     consoleKeyMap = "us";
     defaultLocale = "en_US.UTF-8";
@@ -50,11 +50,14 @@ in
       gnome3.evince
       gnome3.eog
       arandr
+      yubikey-personalization-gui
 
       # dev stuff
       htop
       customVim
       atom
+      vscode
+      nodejs
 
       # programming
       git
@@ -63,11 +66,14 @@ in
       lm_sensors
       openfortivpn
       tree
-      wget
       file
       curl
       python3
+      steam
   ];
+
+  hardware.opengl.driSupport32Bit = true;
+  hardware.pulseaudio.support32Bit = true;
 
   fonts = {
     fontconfig = {
@@ -90,6 +96,7 @@ in
   programs.bash.shellAliases = {
       "vim" = "${customVim}/bin/vim";
   };
+
   services.dbus.enable = true;
   services.xserver = {
     enable = true;
