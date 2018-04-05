@@ -1,4 +1,4 @@
-{ stdenv, gnome3, libmspack, wrapGAppsHook, fetchurl, cmake }:
+{ stdenv, gnome3, libmspack, wrapGAppsHook, fetchurl, cmake, ... }:
 
 # Getting evolution to find external plugins requires patching. Brute force
 # solution: make a derivation with Evolution + EDS + plugins all in one store
@@ -6,10 +6,11 @@
 
 with stdenv.lib;
 let
-    version = "${gnome3.version}.6";
-    ewsSrc=fetchurl {
-     url = "mirror://gnome/sources/evolution-ews/${gnome3.version}/evolution-ews-${version}.tar.xz";
-     sha256 = "0h3cwi2qj72i7d97md8p04c3z8pk0kdikn5nx8vkigky5rhq9vih";
+    gnomeVersionBranch = gnome3.versionBranch gnome3.evolution_data_server.version;
+    version = "${gnomeVersionBranch}.0";
+    ewsSrc = fetchurl {
+     url = "mirror://gnome/sources/evolution-ews/${gnomeVersionBranch}/evolution-ews-${version}.tar.xz";
+     sha256 = "0fnlmaakrivdrsk2ajvqhmsxskzmwf09xdp8klai57z7nv5y7r6w";
    };
    evolution_data_server = gnome3.evolution_data_server;
    evolution = gnome3.evolution;
@@ -44,12 +45,12 @@ stdenv.mkDerivation rec {
     for src in $srcs; do
         tar xf "$src"
     done
-    export PKG_CONFIG_PATH="$PKG_CONFIG_PATH:$out/lib/pkgconfig"
+    export PKG_CONFIG_PATH="$out/lib/pkgconfig:$PKG_CONFIG_PATH"
     echo
     echo "### Building evolution-data-server"
     echo
     pushd ${evolution_data_server.name}
-    cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX:PATH=$out ${concatStringsSep " " evolution_data_server.cmakeFlags or []}
+    cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX:PATH=$out -DENABLE_UOA=OFF -DCMAKE_SKIP_BUILD_RPATH=OFF
     make -j $NIX_BUILD_CORES -l $NIX_BUILD_CORES
     make install
     popd

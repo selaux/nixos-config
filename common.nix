@@ -3,7 +3,7 @@ let
     theme = import ./theme/base16Tomorrow.nix;
     rofiMenus = import ./pkgs/rofiMenus.nix { inherit pkgs theme; };
     customVim = import ./pkgs/vim.nix { inherit pkgs; };
-    evolutionEws = (import ./pkgs/evolutionEws.nix { inherit (pkgs) stdenv gnome3 libmspack wrapGAppsHook fetchurl cmake; });
+    evolutionEws = import ./pkgs/evolutionEws.nix pkgs;
 in
 {
   nix.package = pkgs.nixUnstable;
@@ -15,7 +15,7 @@ in
   };
 
   networking.networkmanager.enable = true;
-  
+
   i18n = {
     consoleKeyMap = "us";
     defaultLocale = "en_US.UTF-8";
@@ -46,7 +46,6 @@ in
       evolutionEws
       libreoffice-fresh
       slack
-      spotify
       gnome3.evince
       gnome3.eog
       arandr
@@ -62,6 +61,10 @@ in
       # programming
       git
 
+      # gaming
+      steam
+      playonlinux
+
       # misc
       lm_sensors
       openfortivpn
@@ -69,7 +72,6 @@ in
       file
       curl
       python3
-      steam
   ];
 
   hardware.opengl.driSupport32Bit = true;
