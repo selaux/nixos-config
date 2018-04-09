@@ -24,6 +24,5 @@
     }
   ];
 
-  services.xserver.displayManager.xserverArgs = [ "-dpi 192" ];
-  fonts.fontconfig.dpi = 192;
+  services.xserver.resolutions = [ { x = 1920; y = 1080; } ];
 }
