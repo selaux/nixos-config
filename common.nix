@@ -46,6 +46,7 @@ in
       evolutionEws
       libreoffice-fresh
       slack
+      hexchat
       gnome3.evince
       gnome3.eog
       arandr
