@@ -130,7 +130,7 @@ let
         }
     '';
     rofi-with-dpi = stdenv.mkDerivation {
-      name = "rofi-with-dpi-${rofi.version}";
+      name = "rofi-with-dpi";
       src = ./.;
       buildInputs = [ rofi makeWrapper ];
       installPhase = ''

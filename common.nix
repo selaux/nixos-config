@@ -6,7 +6,8 @@ let
     evolutionEws = import ./pkgs/evolutionEws.nix pkgs;
 in
 {
-  nix.package = pkgs.nixUnstable;
+  system.nixos.stateVersion = "18.03";
+
   nixpkgs.config.allowUnfree = true;
 
   hardware.pulseaudio = {
@@ -44,7 +45,7 @@ in
       firefox-beta-bin
       chromium
       evolutionEws
-      libreoffice-fresh
+      libreoffice
       slack
       hexchat
       gnome3.evince
@@ -58,6 +59,9 @@ in
       atom
       vscode
       nodejs
+      rustup
+      gcc
+      sbt
 
       # programming
       git
