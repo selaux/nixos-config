@@ -6,7 +6,14 @@ let
     evolutionEws = import ./pkgs/evolutionEws.nix pkgs;
 in
 {
-  system.nixos.stateVersion = "18.03";
+  imports = [
+    ./modules/x-umlauts.nix
+  ];
+
+  boot.plymouth.enable = true;
+  services.tlp.enable = true;
+
+  system.stateVersion = "18.03";
 
   nixpkgs.config.allowUnfree = true;
 
@@ -51,12 +58,11 @@ in
       gnome3.evince
       gnome3.eog
       arandr
-      yubikey-personalization-gui
+      zoom-us
 
       # dev stuff
       htop
       customVim
-      atom
       vscode
       nodejs
       rustup
@@ -68,7 +74,8 @@ in
 
       # gaming
       steam
-      playonlinux
+      wine
+      ja2-stracciatella
 
       # misc
       lm_sensors
