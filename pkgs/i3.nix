@@ -1,6 +1,6 @@
-{ pkgs, rofiMenus, theme }:
+{ pkgs, alacritty, rofiMenus, theme }:
 let
-    inherit (theme) blue background foreground magenta cyan red gray;
+    inherit (theme.colors.normal) blue background foreground magenta cyan red gray;
 in
 ''
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
@@ -11,7 +11,7 @@ hide_edge_borders both
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:DejaVu Sans 11
+font pango:${theme.fonts.default} ${theme.fonts.size}
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -132,23 +132,23 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-client.focused ${blue} ${blue} ${background} ${blue} ${blue}
-client.focused_inactive ${magenta} ${magenta} ${background} ${magenta} ${magenta}
-client.unfocused ${background} ${background} ${foreground} ${background} ${background}
-client.urgent ${red} ${red} ${foreground} ${red} ${red}
-client.placeholder ${background} ${background} ${foreground} ${background} ${background}
+client.focused #${blue} #${blue} #${background} #${blue} #${blue}
+client.focused_inactive #${magenta} #${magenta} #${background} #${magenta} #${magenta}
+client.unfocused #${background} #${background} #${foreground} #${background} #${background}
+client.urgent #${red} #${red} #${foreground} #${red} #${red}
+client.placeholder #${background} #${background} #${foreground} #${background} #${background}
 
 bar {
     status_command py3status
     tray_output primary
     colors {
-        separator ${foreground}
-        background ${background}
-        statusline ${foreground}
-        focused_workspace ${blue} ${blue} ${background}
-        active_workspace ${cyan} ${cyan} ${background}
-        inactive_workspace ${background} ${background} ${foreground}
-        urgent_workspace ${red} ${red} ${foreground}
+        separator #${foreground}
+        background #${background}
+        statusline #${foreground}
+        focused_workspace #${blue} #${blue} #${background}
+        active_workspace #${cyan} #${cyan} #${background}
+        inactive_workspace #${background} #${background} #${foreground}
+        urgent_workspace #${red} #${red} #${foreground}
     }
 }
 

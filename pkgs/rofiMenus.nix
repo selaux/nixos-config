@@ -1,27 +1,27 @@
 { pkgs ? import <nixpkgs> {}, theme ? import ../theme/base16Tomorrow.nix }:
 let
-    inherit (theme) foreground background gray red blue black;
+    inherit (theme.colors.normal) foreground background gray red blue black;
     inherit (pkgs) stdenv makeWrapper writeScript rofi rofi-menugen;
     evaluateCurrentDpi = "$(${pkgs.xorg.xrdb}/bin/xrdb -query | grep dpi | sed 's/Xft.dpi:\s//g')";
     themeFile = pkgs.writeText "rofiTheme" ''
         * {
             selected-normal-foreground:  @lightbg;
-            foreground:                  ${foreground};
+            foreground:                  #${foreground};
             normal-foreground:           @foreground;
             alternate-normal-background: @lightbg;
-            red:                         ${red};
+            red:                         #${red};
             selected-urgent-foreground:  @background;
-            blue:                        ${blue};
+            blue:                        #${blue};
             urgent-foreground:           @red;
             alternate-urgent-background: @lightbg;
             active-foreground:           @blue;
-            lightbg:                     ${background};
+            lightbg:                     #${background};
             selected-active-foreground:  @background;
             alternate-active-background: @lightbg;
-            background:                  ${background};
+            background:                  #${background};
             alternate-normal-foreground: @foreground;
             normal-background:           @background;
-            lightfg:                     ${foreground};
+            lightfg:                     #${foreground};
             selected-normal-background:  @blue;
             border-color:                @foreground;
             spacing:                     2;
@@ -29,7 +29,7 @@ let
             urgent-background:           @background;
             selected-urgent-background:  @red;
             alternate-urgent-foreground: @red;
-            background-color:            ${black};
+            background-color:            #${black};
             alternate-active-foreground: @blue;
             active-background:           @background;
             selected-active-background:  @blue;

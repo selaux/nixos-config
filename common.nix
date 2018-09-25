@@ -2,6 +2,7 @@
 let
     theme = import ./theme/base16Tomorrow.nix;
     rofiMenus = import ./pkgs/rofiMenus.nix { inherit pkgs theme; };
+    alacritty = import ./pkgs/alacritty.nix { inherit pkgs theme; };
     customVim = import ./pkgs/vim.nix { inherit pkgs; };
     evolutionEws = import ./pkgs/evolutionEws.nix pkgs;
 in
@@ -11,10 +12,13 @@ in
   ];
 
   boot.plymouth.enable = true;
+  boot.extraModulePackages = [ pkgs.linuxPackages.wireguard ];
+
   services.tlp.enable = true;
 
   system.stateVersion = "18.03";
 
+  nix.useSandbox = false;
   nixpkgs.config.allowUnfree = true;
 
   hardware.pulseaudio = {
@@ -71,6 +75,7 @@ in
 
       # programming
       git
+      alacritty
 
       # gaming
       steam
@@ -83,6 +88,7 @@ in
       tree
       file
       curl
+      ripgrep
       python3
   ];
 
@@ -159,8 +165,8 @@ in
   systemd.packages = [ evolutionEws ];
 
   environment.variables.EDITOR = "${customVim}/bin/vim";
-  environment.etc."i3config".text = (import ./pkgs/i3.nix { inherit pkgs rofiMenus theme; });
-  environment.etc."i3status.conf".text = import ./pkgs/i3status.nix { inherit pkgs; };
+  environment.etc."i3config".text = (import ./pkgs/i3.nix { inherit pkgs alacritty rofiMenus theme; });
+  environment.etc."i3status.conf".text = import ./pkgs/i3status.nix { inherit pkgs theme; };
   environment.etc."xdg/dunstrc".text = (import ./pkgs/dunstrc.nix { inherit pkgs theme; });
 
   virtualisation.docker.enable = true;

@@ -1,11 +1,14 @@
-{ pkgs }:
+{ pkgs, theme }:
+let
+  normalColors = theme.colors.normal;
+in
 ''
 general {
         output_format = "i3bar"
         colors = false
-        color_good = "#b5bd68"
-        color_degraded = "#f0c674"
-        color_bad = "#cc6666"
+        color_good = "#${normalColors.green}"
+        color_degraded = "#${normalColors.yellow}"
+        color_bad = "#${normalColors.red}"
         interval = 5
 }
 
