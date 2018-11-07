@@ -13,13 +13,13 @@ general {
 }
 
 order += "disk /"
-order += "battery_level"
+order += "battery all"
 order += "tztime local"
 
-battery_level {
-        threshold_bad = 10
-        hide_seconds = true
-        format = "Battery {percent}%"
+battery all {
+        low_threshold = 15
+        format = "%status %percentage"
+        threshold_type = "percentage"
 }
 
 tztime local {

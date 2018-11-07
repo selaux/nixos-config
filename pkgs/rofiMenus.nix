@@ -140,12 +140,23 @@ let
     };
     rofi-menugen-with-dpi = rofi-menugen.override { rofi = rofi-with-dpi; };
 
+    lockScript = writeScript "i3lock-fancy-dunst" ''
+        # suspend message display
+        ${pkgs.procps}/bin/pkill -u "$USER" -USR1 dunst
+
+        # lock the screen
+        ${pkgs.i3lock-fancy}/bin/i3lock-fancy -n -p
+
+        # resume message display
+        ${pkgs.procps}/bin/pkill -u "$USER" -USR2 dunst
+    '';
+
     powerManagement = writeScript "rofi-power-management" ''
         #!${rofi-menugen-with-dpi}/bin/rofi-menugen
         #begin main
         back=false
         prompt="Select:"
-        add_exec 'Lock'         '${pkgs.i3lock-fancy}/bin/i3lock-fancy'
+        add_exec 'Lock'         '${lockScript}'
         add_exec 'Reboot'       'systemctl reboot'
         add_exec 'Power Off'     'systemctl poweroff'
         #end main

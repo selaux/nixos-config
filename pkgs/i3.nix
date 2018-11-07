@@ -97,8 +97,6 @@ bindsym $mod+Shift+0 move container to workspace 10
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
-# Lock Screen
-bindsym $mod+Shift+l exec i3lock-fancy
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec ${rofiMenus}/bin/power-menu
 

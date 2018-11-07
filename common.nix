@@ -4,7 +4,6 @@ let
     rofiMenus = import ./pkgs/rofiMenus.nix { inherit pkgs theme; };
     alacritty = import ./pkgs/alacritty.nix { inherit pkgs theme; };
     customVim = import ./pkgs/vim.nix { inherit pkgs; };
-    emojis = import ./pkgs/emojis.nix { };
     evolutionEws = import ./pkgs/evolutionEws.nix pkgs;
     spotify = import ./pkgs/spotify.nix { inherit pkgs; };
 in
@@ -101,7 +100,6 @@ in
   fonts = {
     fontconfig = {
       enable = true;
-      localConf = emojis;
     };
     enableFontDir = true;
     enableGhostscriptFonts = true;
