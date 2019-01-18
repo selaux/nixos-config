@@ -24,6 +24,6 @@
   
   services.thinkfan = {
     enable = true;
-    sensor = "/sys/class/hwmon/hwmon2/temp1_input";
+    sensors = "hwmon /sys/class/hwmon/hwmon2/temp1_input";
   };
 }
