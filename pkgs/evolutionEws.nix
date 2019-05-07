@@ -7,10 +7,10 @@
 with stdenv.lib;
 let
     gnomeVersionBranch = stdenv.lib.versions.majorMinor gnome3.evolution_data_server.version;
-    version = "${gnomeVersionBranch}.3";
+    version = "${gnomeVersionBranch}.1";
     ewsSrc = fetchurl {
      url = "mirror://gnome/sources/evolution-ews/${gnomeVersionBranch}/evolution-ews-${version}.tar.xz";
-     sha256 = "08k3p6fgj0mvvg62hpmz1hsd1rb9lxp34hxcsmwhjqsgxlyrdxib";
+     sha256 = "1c44nagax1w0dg806mawi2hwl8ihqq5k5n35f2yd83h6hbbgcv0a";
    };
    evolution_data_server = gnome3.evolution_data_server;
    evolution = gnome3.evolution;

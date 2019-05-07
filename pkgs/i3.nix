@@ -153,6 +153,7 @@ bar {
 # Floating stuff
 for_window [class="^firefox$"] floating disable
 
+exec --no-startup-id ${pkgs.gnupg}/bin/gpg-agent --daemon
 exec --no-startup-id ${pkgs.gnome3.networkmanagerapplet}/bin/nm-applet
 exec --no-startup-id ${pkgs.pa_applet}/bin/pa-applet
 exec --no-startup-id ${pkgs.dunst}/bin/dunst -conf /etc/xdg/dunstrc

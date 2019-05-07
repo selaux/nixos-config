@@ -6,6 +6,11 @@ let
     customVim = import ./pkgs/vim.nix { inherit pkgs; };
     evolutionEws = import ./pkgs/evolutionEws.nix pkgs;
     spotify = import ./pkgs/spotify.nix { inherit pkgs; };
+    keepassWithPlugins = (pkgs.keepass.override {
+      plugins = with pkgs; [
+          keepass-keepassrpc
+      ];
+    });
 in
 {
   imports = [
@@ -66,6 +71,9 @@ in
       zoom-us
       spotify
 
+      gnupg
+      keepassWithPlugins
+
       # dev stuff
       htop
       customVim
@@ -119,6 +127,8 @@ in
   programs.bash.shellAliases = {
       "vim" = "${customVim}/bin/vim";
   };
+
+  services.pcscd.enable = true;
 
   services.dbus.enable = true;
   services.xserver = {
